@@ -19,6 +19,7 @@ import {
 import Logo from "./elements/Logo";
 import Navigation from "./elements/Navigation";
 import { cn } from "@/lib/utils";
+import useUIState from "@/hooks/useUIState";
 
 const HeaderDraw = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,6 +46,7 @@ const HeaderDraw = ({ children }) => {
 };
 
 const Header = ({ children }) => {
+  const { headerImageSrc } = useUIState();
   const [isScrolled, serIsScrooled] = useState(false);
   const headRef = useRef();
 
@@ -62,13 +64,17 @@ const Header = ({ children }) => {
 
   return (
     <header ref={headRef} className="relative overflow-y-auto h-full w-full">
+      {/* bgSection */}
       <section className="absolute top-0 w-full">
         <div className="relative h-[400px] w-full">
           <Image
             alt="media"
             className="object-cover"
             fill
-            src="https://images.unsplash.com/photo-1707833558984-3293e794031c"
+            src={
+              headerImageSrc ||
+              "https://images.unsplash.com/photo-1707833558984-3293e794031c"
+            }
           />
           <div className="absolute h-[400px] top-0 bg-black opacity-40 w-full"></div>
           <div className="absolute h-[400px] top-0 bg-gradient-to-t from-black  w-full"></div>
